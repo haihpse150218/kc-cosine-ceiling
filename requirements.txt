@@ -1,0 +1,9 @@
+# Python 3.13.0; versions used for the results in the paper
+numpy==2.5.4
+scipy==1.18.1
+scikit-learn==1.9.1
+matplotlib==3.11.2
+# only for pilot/embed.py (computing embeddings from CelebA images)
+torch==2.11.0
+pillow==13.0.0
+facenet-pytorch
