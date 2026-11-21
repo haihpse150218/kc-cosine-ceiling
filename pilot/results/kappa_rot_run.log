@@ -1,0 +1,34 @@
+kappa cos=0.00 mean=0.0502 approx=0.0500
+kappa cos=0.05 mean=0.0619 approx=0.0614
+kappa cos=0.10 mean=0.0721 approx=0.0743
+kappa cos=0.15 mean=0.0914 approx=0.0887
+kappa cos=0.20 mean=0.1075 approx=0.1049
+kappa cos=0.25 mean=0.1216 approx=0.1229
+kappa cos=0.30 mean=0.1423 approx=0.1427
+kappa cos=0.35 mean=0.1638 approx=0.1645
+kappa cos=0.40 mean=0.1892 approx=0.1885
+kappa cos=0.45 mean=0.2138 approx=0.2149
+kappa cos=0.50 mean=0.2437 approx=0.2438
+kappa cos=0.55 mean=0.2772 approx=0.2755
+kappa cos=0.60 mean=0.3127 approx=0.3105
+kappa cos=0.65 mean=0.3524 approx=0.3491
+kappa cos=0.70 mean=0.3909 approx=0.3920
+kappa cos=0.75 mean=0.4350 approx=0.4402
+kappa cos=0.80 mean=0.4950 approx=0.4951
+kappa cos=0.85 mean=0.5602 approx=0.5593
+kappa cos=0.90 mean=0.6389 approx=0.6374
+kappa cos=0.95 mean=0.7389 approx=0.7416
+kappa cos=0.97 mean=0.7992 approx=0.7993
+kappa cos=0.99 mean=0.8822 approx=0.8838
+facenet gaussian same {'mean_overlap': 0.4061, 'mean_overlap_rot': 0.4039, 'p_ks_rotation': 0.9879, 'mean_cos': 0.6843, 'mean_resid_vs_kappa': -0.001, 'sd_resid_vs_kappa': 0.0378}
+facenet gaussian stranger {'mean_overlap': 0.0616, 'mean_overlap_rot': 0.0581, 'p_ks_rotation': 0.9705, 'mean_cos': 0.0177, 'mean_resid_vs_kappa': -0.0095, 'sd_resid_vs_kappa': 0.0275}
+facenet sparse same {'mean_overlap': 0.407, 'mean_overlap_rot': 0.4115, 'p_ks_rotation': 0.7221, 'mean_cos': 0.6843, 'mean_resid_vs_kappa': -0.0001, 'sd_resid_vs_kappa': 0.037}
+facenet sparse stranger {'mean_overlap': 0.0673, 'mean_overlap_rot': 0.063, 'p_ks_rotation': 0.3958, 'mean_cos': 0.0177, 'mean_resid_vs_kappa': -0.0038, 'sd_resid_vs_kappa': 0.0279}
+facenet image {'auc_raw_cos': 0.8997522040077499, 'auc_lr_ceiling_crossfit': 0.9246385695558883}
+facenet identity {'auc_raw_cos': 0.9624956497304357, 'auc_lr_ceiling_crossfit': 0.9686809282454466}
+dinov2 gaussian same {'mean_overlap': 0.2559, 'mean_overlap_rot': 0.2557, 'p_ks_rotation': 0.9999, 'mean_cos': 0.4986, 'mean_resid_vs_kappa': -0.0033, 'sd_resid_vs_kappa': 0.041}
+dinov2 gaussian stranger {'mean_overlap': 0.1626, 'mean_overlap_rot': 0.1662, 'p_ks_rotation': 0.9003, 'mean_cos': 0.3322, 'mean_resid_vs_kappa': -0.0049, 'sd_resid_vs_kappa': 0.0358}
+dinov2 sparse same {'mean_overlap': 0.2603, 'mean_overlap_rot': 0.2672, 'p_ks_rotation': 0.9705, 'mean_cos': 0.4986, 'mean_resid_vs_kappa': 0.0011, 'sd_resid_vs_kappa': 0.0419}
+dinov2 sparse stranger {'mean_overlap': 0.1717, 'mean_overlap_rot': 0.1706, 'p_ks_rotation': 0.8483, 'mean_cos': 0.3322, 'mean_resid_vs_kappa': 0.0042, 'sd_resid_vs_kappa': 0.0365}
+dinov2 image {'auc_raw_cos': 0.21979607500423998, 'auc_lr_ceiling_crossfit': 0.7836823650734397}
+dinov2 identity {'auc_raw_cos': 0.5615111179112886, 'auc_lr_ceiling_crossfit': 0.5562471121348764}

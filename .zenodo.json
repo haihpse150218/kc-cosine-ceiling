@@ -1,0 +1,21 @@
+{
+  "title": "The cosine ceiling: code and summary results",
+  "upload_type": "software",
+  "description": "Code, theory notes, summary results and manuscript sources for the Letter \"The cosine ceiling: what random-projection Kenyon-cell codes can add to frozen embeddings\". Contains the k-WTA Kenyon-cell code, the synthetic check of Observation 1, the closed-form overlap kappa(c) versus Monte-Carlo, the rotation control and the AUC comparison with the cosine and likelihood-ratio ceilings on CelebA face embeddings (facenet/VGGFace2 and DINOv2 ViT-S/14). CelebA images, identity labels, per-image splits and per-image embeddings are not redistributed; a seeded script rebuilds the splits from the original CelebA files. Code: MIT License.",
+  "creators": [
+    {
+      "name": "Hoang, Phi Hai",
+      "affiliation": "FPT School of Business and Technology (FSB), FPT University"
+    }
+  ],
+  "license": "MIT",
+  "keywords": [
+    "Kenyon cells",
+    "fly hashing",
+    "random projection",
+    "winners-take-all",
+    "face embeddings",
+    "Blackwell sufficiency"
+  ],
+  "version": "v1.2-submission"
+}

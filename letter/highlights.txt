@@ -1,0 +1,5 @@
+Rotation-invariant Kenyon-cell codes depend on inputs only through cosines
+Weight-independent readouts cannot beat the likelihood-ratio test on cosines
+The expected code overlap has a closed form in Owen's T function
+Sparse binary codes match their rotated, covered version on face embeddings
+Random KC layers preserve, not improve, discriminability of frozen embeddings

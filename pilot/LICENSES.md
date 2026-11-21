@@ -1,0 +1,47 @@
+# LICENSES — Gate G0 (pilot mb-hot-stove)
+
+Ngày kiểm: 2026-11-15. Mục đích sử dụng: nghiên cứu học thuật, phi thương mại; kết quả công bố ở *Neural Networks*, phát hành code.
+Quy tắc: chỉ ghi điều đã đọc tận nguồn; mỗi claim có URL đã mở + câu trích nguyên văn. Không kiểm chứng được → **[CHƯA KIỂM CHỨNG]**.
+Lưu ý: đây là đánh giá kỹ thuật của trợ lý, **không phải tư vấn pháp lý**.
+
+## 1. Bảng tài sản
+
+| Asset | Licence / terms | Dùng được cho mục đích của ta? | Ta được release gì | Nguồn (URL đã mở) + trích nguyên văn |
+|---|---|---|---|---|
+| **facenet-pytorch (code)** | MIT License, "Copyright (c) 2019 Timothy Esler" | **Có** | Code của ta (gọi thư viện qua pip); nếu vendor code phải giữ MIT notice | https://raw.githubusercontent.com/timesler/facenet-pytorch/master/LICENSE.md — "Permission is hereby granted, free of charge, to any person obtaining a copy of this software" |
+| **InceptionResnetV1 'vggface2' weights** (`20180402-114759-vggface2.pt`, 107MB) | **Không có licence riêng cho weights** trên README. Weights được port từ davidsandberg/facenet (repo MIT). Không thấy điều khoản cấm dùng cho nghiên cứu công bố. Điều khoản của dataset gốc VGGFace2: **[CHƯA KIỂM CHỨNG]** (xem dòng VGGFace2) | **Có, rủi ro thấp–trung bình** (không có điều khoản cấm tìm thấy; dataset gốc đã bị gỡ) | KHÔNG re-host file .pt; chỉ trỏ tới URL release gốc + hash. Release embedding: không nên (xem CelebA) | https://github.com/timesler/facenet-pytorch — "Pytorch model weights were initialized using parameters ported from David Sandberg's" tensorflow facenet repo; README không ghi licence cho weights. URL: https://github.com/timesler/facenet-pytorch/releases/download/v2.2.9/20180402-114759-vggface2.pt |
+| **InceptionResnetV1 'casia-webface' weights** (`20180408-102900-casia-webface.pt`, 111MB) | Như trên (không licence riêng). Điều khoản CASIA-WebFace gốc: **[CHƯA KIỂM CHỨNG]** | Có, rủi ro trung bình (CASIA được báo là cần agreement ký bởi tổ chức — nguồn thứ cấp) | Như trên | https://github.com/timesler/facenet-pytorch — URL: https://github.com/timesler/facenet-pytorch/releases/download/v2.2.9/20180408-102900-casia-webface.pt |
+| **davidsandberg/facenet** (nguồn weights) | MIT License, "Copyright (c) 2016 David Sandberg". Không có licence riêng cho pretrained models; chỉ yêu cầu ghi công dataset | Có | Trích dẫn repo + dataset | https://raw.githubusercontent.com/davidsandberg/facenet/master/LICENSE.md (MIT); https://github.com/davidsandberg/facenet — "please do not forget to give proper credit to those providing the training dataset as well." |
+| **VGGFace2 dataset** (Oxford VGG) | Trang chính thức **không còn nêu licence/terms**; dataset đã ngừng phân phối. Licence gốc (CC BY-SA 4.0 hay non-commercial?) **[CHƯA KIỂM CHỨNG]** — không mở được bản lưu web.archive.org | Ta **không dùng dataset**, chỉ dùng model đã train → không cần tải. Không tìm thấy điều khoản nào cấm dùng model cho nghiên cứu công bố | Không release gì từ VGGFace2 | https://www.robots.ox.ac.uk/~vgg/data/vgg_face2/ — "The download links for the VGGFace2 dataset are no longer available from this website." ; https://github.com/ox-vgg/vgg_face2 — README không có mục licence |
+| **CASIA-WebFace dataset** | Trang chính thức **không truy cập được** (ECONNREFUSED). Nguồn thứ cấp (blog CSDN) nói phải ký agreement do tổ chức ký, cá nhân không được nộp → **[CHƯA KIỂM CHỨNG]** | Ta không dùng dataset; chỉ dùng weights (nếu có) | Không | http://www.cbsr.ia.ac.cn/english/CASIA-WebFace-Database.html (lỗi kết nối); thứ cấp: https://blog.csdn.net/Alpine_Climbing/article/details/50502492 [CHƯA KIỂM CHỨNG] |
+| **DINOv2 code + weights** | Apache License 2.0 (cả code và weights backbone chính). Ngoại lệ: Cell-DINO/XRay-DINO là non-commercial — ta không dùng | **Có** (kể cả thương mại) | Code, weights (nếu cần, kèm NOTICE Apache), embedding từ ảnh *không bị ràng buộc khác* | https://github.com/facebookresearch/dinov2 — "DINOv2 code and model weights are released under the Apache License 2.0." ; https://raw.githubusercontent.com/facebookresearch/dinov2/main/LICENSE — "Apache License Version 2.0, January 2004". ViT-S/14: 21 M params, URL https://dl.fbaipublicfiles.com/dinov2/dinov2_vits14/dinov2_vits14_pretrain.pth |
+| **CelebA** | Agreement MMLAB: chỉ nghiên cứu phi thương mại; cấm copy/publish/distribute bất kỳ phần nào của dataset; cấm khai thác thương mại "derived data"; identities chỉ cấp "upon request for research purposes only" | **Có** cho nghiên cứu phi thương mại + công bố **kết quả tổng hợp** (số liệu, bảng, biểu đồ). Việc công bố kết quả không bị cấm trong agreement | **KHÔNG** release ảnh, `identity_CelebA.txt`, hay file chỉ số per-image identity (là "portion of the CelebA dataset"). **Embedding per-image: KHÔNG release** (an toàn; "derived data" chỉ bị cấm *thương mại* nhưng chứa thông tin sinh trắc — xem G0). **Được release**: code + script tái tạo split từ file gốc (seed, quy tắc lọc), hash md5 của file gốc, số liệu tổng hợp | https://mmlab.ie.cuhk.edu.hk/projects/CelebA.html — "The CelebA dataset is available for non-commercial research purposes only." ; "You agree not to further copy, publish or distribute any portion of the CelebA dataset." ; "You agree not to reproduce, duplicate, copy, sell, trade, resell or exploit for any commercial purposes" … "any portion of the images and any portion of derived data." ; "The face identities are released upon request for research purposes only." |
+| **CLIP (OpenAI)** — phương án thay thế | Code: MIT. Licence weights: **không nêu trên README [CHƯA KIỂM CHỨNG]** | Có cho code; weights [CHƯA KIỂM CHỨNG] | Code | https://github.com/openai/CLIP — repo ghi "MIT license"; README không nêu licence weights |
+| **DigiFace-1M** (Microsoft, ảnh khuôn mặt tổng hợp) — phương án thay thế "licence-clean" | Non-commercial research (theo LICENSE của repo) | Có cho nghiên cứu phi thương mại; licence model train trên nó: không nêu | Code; model tự train [CHƯA KIỂM CHỨNG điều kiện release] | https://github.com/microsoft/DigiFace1M — "The DigiFace-1M dataset can be used for non-commercial research, and is licensed under the license found in" LICENSE |
+
+### Ghi chú về identity_CelebA.txt
+Agreement viết "The face identities are released upon request for research purposes only. Please contact us for details." Tuy nhiên file `identity_CelebA.txt` hiện nằm trong thư mục Google Drive chính thức ("Identities Annotations") và được torchvision tải tự động. Việc tải từ link chính thức là hợp lệ cho nghiên cứu; **có cần email xin phép hay không: [CHƯA KIỂM CHỨNG]** → khuyến nghị gửi email thông báo cho MMLAB (thao tác của người dùng, không tự động).
+
+## 2. Danh sách tải (download list)
+
+| File | Nguồn | Kích thước | md5 (theo torchvision) |
+|---|---|---|---|
+| `img_align_celeba.zip` | Google Drive chính thức CelebA: https://drive.google.com/drive/folders/0B7EVK8r0v71pWEZsZE9oNnFzTm8?resourcekey=0-5BR16BdXnb8hVj6CNHKzLg&usp=sharing (file id `0B7EVK8r0v71pZjFTYXZWM3FlRnM`) | **[CHƯA KIỂM CHỨNG]** — trang chính thức không ghi size (thường được nói ~1.4 GB, chưa xác minh) | `00d2c5bc6d35e252742224ab0c1e8fcb` |
+| `identity_CelebA.txt` | Cùng thư mục Drive (file id `1_ee_0u7vcNLOfNLegJRHmolfH5ICW-XS`) | **[CHƯA KIỂM CHỨNG]** (file text nhỏ, vài MB) | `32bd1bd63d3c78cd57e08160ec5ed1e2` |
+| `list_eval_partition.txt` (tuỳ chọn) | Cùng thư mục Drive (id `0B7EVK8r0v71pY0NSMzRuSXJEVkk`) | [CHƯA KIỂM CHỨNG] | `d32c9cbf5e040fd4025c592c306e6668` |
+| `20180402-114759-vggface2.pt` | https://github.com/timesler/facenet-pytorch/releases/download/v2.2.9/20180402-114759-vggface2.pt | 107MB (theo README) | — |
+| `dinov2_vits14_pretrain.pth` | https://dl.fbaipublicfiles.com/dinov2/dinov2_vits14/dinov2_vits14_pretrain.pth | **[CHƯA KIỂM CHỨNG]** — README chỉ ghi 21 M params (ước tính fp32 ≈ 85 MB, chưa đo) | — |
+| `20180408-102900-casia-webface.pt` (chỉ nếu cần ablation) | https://github.com/timesler/facenet-pytorch/releases/download/v2.2.9/20180408-102900-casia-webface.pt | 111MB (theo README) | — |
+
+Nguồn md5/file id: https://raw.githubusercontent.com/pytorch/vision/main/torchvision/datasets/celeba.py (`file_list`).
+
+## 3. Quyết định G0
+
+**G0 = PASS (có điều kiện). Không dừng dự án.**
+
+Quy tắc: "if VGGFace2 weight terms forbid use for published research → switch face backbone or use DINOv2/CLIP only; never stop the project".
+
+- Không tìm thấy điều khoản nào (trên facenet-pytorch, davidsandberg/facenet, trang VGGFace2, repo ox-vgg) **cấm** dùng weights 'vggface2' cho nghiên cứu công bố. Cả hai repo code là MIT; weights không có licence riêng. → Điều kiện kích hoạt "switch" **không xảy ra** → **giữ InceptionResnetV1-vggface2 làm face backbone chính**.
+- Rủi ro còn lại: licence gốc của VGGFace2 [CHƯA KIỂM CHỨNG] và dataset đã bị gỡ. Giảm thiểu: **DINOv2 ViT-S/14 (Apache-2.0) chạy song song làm backbone thứ hai/đối chứng**, để mọi kết luận chính đứng vững nếu sau này phải bỏ backbone face. Không dùng weights casia-webface làm kết quả chính (điều khoản CASIA không kiểm chứng được).
+- CelebA: dùng cho nghiên cứu phi thương mại, công bố kết quả tổng hợp. **Không release**: ảnh, file identity, danh sách chỉ số per-image identity, embedding per-image. **Release**: code, script sinh split deterministic (seed) từ file gốc + md5 để người khác tự tái tạo sau khi tự đồng ý agreement CelebA.
+- Việc cần người dùng tự làm: (a) đọc và đồng ý agreement CelebA khi tải; (b) cân nhắc email MMLAB về file identity; (c) trong bài báo ghi rõ nguồn weights, dataset huấn luyện (VGGFace2) và trích dẫn theo yêu cầu davidsandberg/facenet.

@@ -1,0 +1,142 @@
+[facenet] ceiling AUC pos-vs-lookalike 0.9625  pos-vs-random 0.9959  O=0.526
+  facenet_gaussian_rot0_d0: AUC 0.9575  delta -0.0050  CI [-0.0060, -0.0041]
+  facenet_gaussian_rot0_d1: AUC 0.9574  delta -0.0050  CI [-0.0058, -0.0042]
+  facenet_gaussian_rot0_d2: AUC 0.9569  delta -0.0056  CI [-0.0064, -0.0047]
+  facenet_gaussian_rot0_d3: AUC 0.9574  delta -0.0051  CI [-0.0060, -0.0043]
+  facenet_gaussian_rot0_d4: AUC 0.9573  delta -0.0052  CI [-0.0061, -0.0043]
+  facenet_gaussian_rot0_d5: AUC 0.9568  delta -0.0057  CI [-0.0066, -0.0047]
+  facenet_gaussian_rot0_d6: AUC 0.9564  delta -0.0061  CI [-0.0069, -0.0052]
+  facenet_gaussian_rot0_d7: AUC 0.9565  delta -0.0060  CI [-0.0069, -0.0050]
+  facenet_gaussian_rot0_d8: AUC 0.9559  delta -0.0066  CI [-0.0076, -0.0058]
+  facenet_gaussian_rot0_d9: AUC 0.9567  delta -0.0058  CI [-0.0067, -0.0049]
+  facenet_gaussian_rot1_d0: AUC 0.9572  delta -0.0053  CI [-0.0060, -0.0046]
+  facenet_gaussian_rot1_d1: AUC 0.9565  delta -0.0060  CI [-0.0068, -0.0052]
+  facenet_gaussian_rot1_d2: AUC 0.9565  delta -0.0060  CI [-0.0069, -0.0051]
+  facenet_gaussian_rot1_d3: AUC 0.9556  delta -0.0069  CI [-0.0078, -0.0060]
+  facenet_gaussian_rot1_d4: AUC 0.9557  delta -0.0068  CI [-0.0077, -0.0060]
+  facenet_gaussian_rot1_d5: AUC 0.9569  delta -0.0056  CI [-0.0066, -0.0048]
+  facenet_gaussian_rot1_d6: AUC 0.9566  delta -0.0059  CI [-0.0068, -0.0051]
+  facenet_gaussian_rot1_d7: AUC 0.9553  delta -0.0072  CI [-0.0081, -0.0063]
+  facenet_gaussian_rot1_d8: AUC 0.9564  delta -0.0061  CI [-0.0070, -0.0053]
+  facenet_gaussian_rot1_d9: AUC 0.9564  delta -0.0061  CI [-0.0070, -0.0053]
+  facenet_sparse_rot0_d0: AUC 0.9563  delta -0.0062  CI [-0.0071, -0.0053]
+  facenet_sparse_rot0_d1: AUC 0.9566  delta -0.0059  CI [-0.0069, -0.0051]
+  facenet_sparse_rot0_d2: AUC 0.9555  delta -0.0070  CI [-0.0079, -0.0060]
+  facenet_sparse_rot0_d3: AUC 0.9560  delta -0.0065  CI [-0.0074, -0.0055]
+  facenet_sparse_rot0_d4: AUC 0.9565  delta -0.0060  CI [-0.0069, -0.0051]
+  facenet_sparse_rot0_d5: AUC 0.9556  delta -0.0069  CI [-0.0077, -0.0059]
+  facenet_sparse_rot0_d6: AUC 0.9553  delta -0.0072  CI [-0.0082, -0.0064]
+  facenet_sparse_rot0_d7: AUC 0.9560  delta -0.0065  CI [-0.0075, -0.0056]
+  facenet_sparse_rot0_d8: AUC 0.9561  delta -0.0064  CI [-0.0074, -0.0055]
+  facenet_sparse_rot0_d9: AUC 0.9561  delta -0.0064  CI [-0.0073, -0.0055]
+  facenet_sparse_rot1_d0: AUC 0.9566  delta -0.0059  CI [-0.0068, -0.0049]
+  facenet_sparse_rot1_d1: AUC 0.9557  delta -0.0068  CI [-0.0077, -0.0059]
+  facenet_sparse_rot1_d2: AUC 0.9551  delta -0.0074  CI [-0.0084, -0.0066]
+  facenet_sparse_rot1_d3: AUC 0.9560  delta -0.0065  CI [-0.0075, -0.0055]
+  facenet_sparse_rot1_d4: AUC 0.9555  delta -0.0070  CI [-0.0079, -0.0061]
+  facenet_sparse_rot1_d5: AUC 0.9565  delta -0.0060  CI [-0.0068, -0.0050]
+  facenet_sparse_rot1_d6: AUC 0.9564  delta -0.0061  CI [-0.0071, -0.0052]
+  facenet_sparse_rot1_d7: AUC 0.9558  delta -0.0067  CI [-0.0077, -0.0057]
+  facenet_sparse_rot1_d8: AUC 0.9564  delta -0.0061  CI [-0.0070, -0.0052]
+  facenet_sparse_rot1_d9: AUC 0.9559  delta -0.0066  CI [-0.0075, -0.0057]
+[dinov2] ceiling AUC pos-vs-lookalike 0.5615  pos-vs-random 0.8390  O=0.999
+  dinov2_gaussian_rot0_d0: AUC 0.5582  delta -0.0033  CI [-0.0057, -0.0008]
+  dinov2_gaussian_rot0_d1: AUC 0.5589  delta -0.0026  CI [-0.0050, -0.0003]
+  dinov2_gaussian_rot0_d2: AUC 0.5538  delta -0.0077  CI [-0.0099, -0.0051]
+  dinov2_gaussian_rot0_d3: AUC 0.5571  delta -0.0045  CI [-0.0068, -0.0023]
+  dinov2_gaussian_rot0_d4: AUC 0.5621  delta +0.0006  CI [-0.0017, +0.0030]
+  dinov2_gaussian_rot0_d5: AUC 0.5586  delta -0.0029  CI [-0.0054, -0.0007]
+  dinov2_gaussian_rot0_d6: AUC 0.5557  delta -0.0058  CI [-0.0081, -0.0036]
+  dinov2_gaussian_rot0_d7: AUC 0.5618  delta +0.0003  CI [-0.0019, +0.0028]
+  dinov2_gaussian_rot0_d8: AUC 0.5570  delta -0.0045  CI [-0.0066, -0.0024]
+  dinov2_gaussian_rot0_d9: AUC 0.5546  delta -0.0069  CI [-0.0091, -0.0045]
+  dinov2_gaussian_rot1_d0: AUC 0.5596  delta -0.0019  CI [-0.0041, +0.0006]
+  dinov2_gaussian_rot1_d1: AUC 0.5605  delta -0.0011  CI [-0.0034, +0.0011]
+  dinov2_gaussian_rot1_d2: AUC 0.5544  delta -0.0071  CI [-0.0094, -0.0047]
+  dinov2_gaussian_rot1_d3: AUC 0.5574  delta -0.0041  CI [-0.0064, -0.0017]
+  dinov2_gaussian_rot1_d4: AUC 0.5537  delta -0.0078  CI [-0.0099, -0.0055]
+  dinov2_gaussian_rot1_d5: AUC 0.5580  delta -0.0035  CI [-0.0059, -0.0013]
+  dinov2_gaussian_rot1_d6: AUC 0.5625  delta +0.0010  CI [-0.0017, +0.0036]
+  dinov2_gaussian_rot1_d7: AUC 0.5608  delta -0.0007  CI [-0.0032, +0.0016]
+  dinov2_gaussian_rot1_d8: AUC 0.5614  delta -0.0001  CI [-0.0029, +0.0024]
+  dinov2_gaussian_rot1_d9: AUC 0.5589  delta -0.0026  CI [-0.0051, -0.0008]
+  dinov2_sparse_rot0_d0: AUC 0.5558  delta -0.0057  CI [-0.0080, -0.0029]
+  dinov2_sparse_rot0_d1: AUC 0.5602  delta -0.0013  CI [-0.0041, +0.0015]
+  dinov2_sparse_rot0_d2: AUC 0.5566  delta -0.0049  CI [-0.0077, -0.0027]
+  dinov2_sparse_rot0_d3: AUC 0.5593  delta -0.0022  CI [-0.0048, +0.0002]
+  dinov2_sparse_rot0_d4: AUC 0.5548  delta -0.0067  CI [-0.0092, -0.0046]
+  dinov2_sparse_rot0_d5: AUC 0.5552  delta -0.0063  CI [-0.0086, -0.0036]
+  dinov2_sparse_rot0_d6: AUC 0.5596  delta -0.0020  CI [-0.0045, +0.0006]
+  dinov2_sparse_rot0_d7: AUC 0.5557  delta -0.0058  CI [-0.0082, -0.0035]
+  dinov2_sparse_rot0_d8: AUC 0.5522  delta -0.0093  CI [-0.0115, -0.0066]
+  dinov2_sparse_rot0_d9: AUC 0.5559  delta -0.0056  CI [-0.0077, -0.0029]
+  dinov2_sparse_rot1_d0: AUC 0.5569  delta -0.0046  CI [-0.0070, -0.0022]
+  dinov2_sparse_rot1_d1: AUC 0.5584  delta -0.0031  CI [-0.0057, -0.0005]
+  dinov2_sparse_rot1_d2: AUC 0.5539  delta -0.0076  CI [-0.0101, -0.0057]
+  dinov2_sparse_rot1_d3: AUC 0.5597  delta -0.0018  CI [-0.0045, +0.0009]
+  dinov2_sparse_rot1_d4: AUC 0.5580  delta -0.0035  CI [-0.0061, -0.0012]
+  dinov2_sparse_rot1_d5: AUC 0.5531  delta -0.0084  CI [-0.0109, -0.0057]
+  dinov2_sparse_rot1_d6: AUC 0.5589  delta -0.0026  CI [-0.0052, -0.0002]
+  dinov2_sparse_rot1_d7: AUC 0.5578  delta -0.0037  CI [-0.0059, -0.0012]
+  dinov2_sparse_rot1_d8: AUC 0.5642  delta +0.0027  CI [-0.0001, +0.0051]
+  dinov2_sparse_rot1_d9: AUC 0.5589  delta -0.0026  CI [-0.0051, -0.0001]
+{
+ "facenet": {
+  "n_images": 182152,
+  "n_test_persons": 2966,
+  "K": 5,
+  "auc_cos_pos_vs_look": 0.9624956497304357,
+  "auc_cos_pos_vs_rand": 0.9958910129591881,
+  "O_share_persons_top1_lookalike_above_p5_pos": 0.5256237356709373,
+  "kc_gaussian_rot0": {
+   "auc_mean": 0.9568956951542067,
+   "auc_sd": 0.000508081772769384,
+   "delta_mean_vs_ceiling": -0.0055999545762289715
+  },
+  "kc_gaussian_rot1": {
+   "auc_mean": 0.956296044539849,
+   "auc_sd": 0.0005597803214702703,
+   "delta_mean_vs_ceiling": -0.00619960519058671
+  },
+  "kc_sparse_rot0": {
+   "auc_mean": 0.95598744275991,
+   "auc_sd": 0.0004096965374280867,
+   "delta_mean_vs_ceiling": -0.006508206970525676
+  },
+  "kc_sparse_rot1": {
+   "auc_mean": 0.9559774288417758,
+   "auc_sd": 0.0004670694658770457,
+   "delta_mean_vs_ceiling": -0.006518220888659831
+  },
+  "seconds": 224
+ },
+ "dinov2": {
+  "n_images": 182152,
+  "n_test_persons": 2966,
+  "K": 5,
+  "auc_cos_pos_vs_look": 0.5615111179112886,
+  "auc_cos_pos_vs_rand": 0.8390226591412043,
+  "O_share_persons_top1_lookalike_above_p5_pos": 0.9993256911665542,
+  "kc_gaussian_rot0": {
+   "auc_mean": 0.5577920177839293,
+   "auc_sd": 0.0026195141865797264,
+   "delta_mean_vs_ceiling": -0.0037191001273593205
+  },
+  "kc_gaussian_rot1": {
+   "auc_mean": 0.5587006759911952,
+   "auc_sd": 0.002748368595183823,
+   "delta_mean_vs_ceiling": -0.0028104419200933872
+  },
+  "kc_sparse_rot0": {
+   "auc_mean": 0.5565373129679637,
+   "auc_sd": 0.002362103842833275,
+   "delta_mean_vs_ceiling": -0.004973804943324889
+  },
+  "kc_sparse_rot1": {
+   "auc_mean": 0.5579743380701673,
+   "auc_sd": 0.0029210999484097413,
+   "delta_mean_vs_ceiling": -0.003536779841121329
+  },
+  "seconds": 215
+ }
+}

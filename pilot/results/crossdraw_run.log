@@ -1,0 +1,18 @@
+facenet cos(u, 1/sqrt d): {'mean': -0.007679305331133108, 'sd': 0.0461333841374996, 'p5': -0.08406248690270143, 'p95': 0.06808886288517771}
+ original embeddings
+  gaussian rot0: per-draw 0.9569  cross-draw 0.9569
+  gaussian rot1: per-draw 0.9563  cross-draw 0.9563
+  sparse rot0: per-draw 0.9560  cross-draw 0.9560
+  sparse rot1: per-draw 0.9560  cross-draw 0.9560
+ mean-centred embeddings
+  gaussian rot0: per-draw 0.9566  cross-draw 0.9566
+  sparse rot0: per-draw 0.9557  cross-draw 0.9557
+dinov2 cos(u, 1/sqrt d): {'mean': -0.003333937351797485, 'sd': 0.0102556030988489, 'p5': -0.019640597150392236, 'p95': 0.014133972847555448}
+ original embeddings
+  gaussian rot0: per-draw 0.5578  cross-draw 0.5577
+  gaussian rot1: per-draw 0.5587  cross-draw 0.5586
+  sparse rot0: per-draw 0.5565  cross-draw 0.5565
+  sparse rot1: per-draw 0.5580  cross-draw 0.5578
+ mean-centred embeddings
+  gaussian rot0: per-draw 0.5751  cross-draw 0.5751
+  sparse rot0: per-draw 0.5750  cross-draw 0.5750
