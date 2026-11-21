@@ -6,7 +6,7 @@ Code and summary results for the Letter
 
 A Kenyon-cell (KC) code is a random projection `W` followed by k-winners-take-all. With i.i.d. Gaussian `W` the joint law of the codes of any set of inputs depends only on their cosine matrix (Observation 1), so any readout of the codes is a garbling of that matrix and, in expectation over `W`, cannot beat the likelihood-ratio test on cosines (Corollary 1). The scripts check this on synthetic vectors and on CelebA face embeddings from two frozen backbones (facenet / VGGFace2, 512-d; DINOv2 ViT-S/14, 384-d), with Gaussian and sparse binary `W`, with and without a random rotation of the embedding.
 
-Archived on Zenodo: [10.5281/zenodo.24411197](https://doi.org/10.5281/zenodo.24411197) (this version; all versions: [10.5281/zenodo.24411196](https://doi.org/10.5281/zenodo.24411196)).
+Archived on Zenodo: [10.5281/zenodo.24411558](https://doi.org/10.5281/zenodo.24411558) (this version; all versions: [10.5281/zenodo.24411196](https://doi.org/10.5281/zenodo.24411196)).
 
 ## Layout
 
