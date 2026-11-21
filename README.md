@@ -16,7 +16,9 @@ Archived on Zenodo: [10.5281/zenodo.24411558](https://doi.org/10.5281/zenodo.244
 | `pilot/lemma1_synthetic.py` | Observation 1 on synthetic vectors: rotation, scale and cosine-only checks (no face data needed) |
 | `pilot/make_splits.py` | Identity-disjoint dev / test / stranger-pool splits of CelebA (seed 20261116, ≥ 15 images per identity), with an md5 check of `identity_CelebA.txt` |
 | `pilot/embed.py` | Embeddings from the two frozen backbones; resumable shards |
-| `pilot/ceiling_kc.py` | Main experiment: AUC of cosine vs KC codes (10 draws of `W` per setting), bootstrap CIs over persons |
+| `pilot/ceiling_v3.py` | **Main experiment of the Letter (Table 1)**: look-alikes selected with the other backbone, cross-draw AUC of KC codes vs cosine, bootstrap CIs over identities, LR lower bounds, all-ones projection control, v1 selection artefact |
+| `pilot/pairs_v2.py`, `pilot/hist_v3.py` | Real-pair overlaps vs closed-form kappa (KS on independent halves, residuals, binned means) and the Fig. 1b histogram |
+| `pilot/crossdraw.py`, `pilot/ceiling_kc.py` | Earlier task versions (v2 / v1), kept for the record |
 | `pilot/kappa_rot.py` | Closed-form κ(c) vs Monte-Carlo, rotation KS test on real pairs, cross-fitted likelihood-ratio ceiling |
 | `pilot/results/` | Summary results only (per-setting AUCs and CIs, κ table, KS statistics, split counts) and run logs |
 | `pilot/LICENSES.md` | Licence review of the data, code and weights used (Vietnamese) |
@@ -37,7 +39,9 @@ python -m venv .venv && .venv/Scripts/pip install -r requirements.txt   # bin/ i
 .venv/Scripts/python pilot/make_splits.py             # -> data/celeba/splits.json (local only)
 .venv/Scripts/python pilot/embed.py facenet
 .venv/Scripts/python pilot/embed.py dinov2
-.venv/Scripts/python pilot/ceiling_kc.py facenet dinov2
+.venv/Scripts/python pilot/ceiling_v3.py
+.venv/Scripts/python pilot/pairs_v2.py
+.venv/Scripts/python pilot/hist_v3.py
 .venv/Scripts/python pilot/kappa_rot.py
 ```
 
