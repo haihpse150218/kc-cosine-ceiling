@@ -34,13 +34,13 @@ ax[0].plot(cc, kappa(cc), 'k-', lw=1.2, label=r'closed form $\kappa(c)$')
 g = k['kappa_gaussian']
 c = np.array([r['cos'] for r in g]); m = np.array([r['mean'] for r in g]); sd = np.array([r['sd'] for r in g])
 ax[0].errorbar(c, m, yerr=sd, fmt='o', ms=3, color='C0', elinewidth=0.6, capsize=0, label='Monte-Carlo (Gaussian $W$)')
-for bb, mk in [('facenet', 's'), ('dinov2', '^')]:
-    for kind, col in [('gaussian', 'C1'), ('sparse', 'C2')]:
+for bb, mk, name, dx in [('facenet', 's', 'facenet', -0.012), ('dinov2', '^', 'DINOv2', 0.012)]:
+    for kind, col, fill, kn in [('gaussian', 'C1', True, 'Gaussian'), ('sparse', 'C2', False, 'sparse')]:
         rows = pv[bb]['binned'][kind]
-        ax[0].plot([r['cos_mid'] for r in rows], [r['mean_overlap'] for r in rows], mk, color=col, ms=4, mfc='none',
-                   label=f'faces, {kind} $W$' if bb == 'facenet' else None)
+        ax[0].plot([r['cos_mid'] + dx for r in rows], [r['mean_overlap'] for r in rows], mk, color=col, ms=4,
+                   mfc=col if fill else 'none', label=f'{name}, {kn} $W$')
 ax[0].set_xlabel('cosine $c$'); ax[0].set_ylabel('expected code overlap'); ax[0].set_title('(a)', loc='left', fontsize=9)
-ax[0].legend(fontsize=6.5, frameon=False)
+ax[0].legend(fontsize=6, frameon=False, ncol=1)
 b = np.array(hv['bins']); ctr = (b[:-1] + b[1:]) / 2
 for key, lab, col in [('pos', 'same person', 'C0'), ('look', 'look-alike stranger', 'C3'), ('rand', 'random stranger', '0.6')]:
     y = np.array(hv[key], float); y /= y.sum() * (b[1] - b[0])
