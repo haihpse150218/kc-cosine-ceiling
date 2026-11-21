@@ -2,6 +2,7 @@
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{booktabs}
 \usepackage{graphicx}
+\usepackage{caption}
 \usepackage[hidelinks]{hyperref}
 \newtheorem{observation}{Observation}
 \newtheorem{corollary}{Corollary}
@@ -19,12 +20,13 @@
 \address{FPT School of Business and Technology (FSB), FPT University, Ho Chi Minh City, Vietnam}
 
 \begin{abstract}
-Fly-inspired codes (random projection followed by $k$-winners-take-all) are placed on top of
-pretrained embeddings. With Gaussian weights, the joint law of the codes depends on the inputs only through
-their cosine matrix, so any readout is a garbling of that matrix and, in expectation over weights, cannot beat
-the likelihood-ratio test on cosines. We give the code-overlap curve in closed form and test the bound on 182,152 face images. Sparse
-binary projections, which the bound does not cover, behave as rotation-invariant on real embeddings and also
-add nothing. Advantages of such circuits must come from learned weights, dynamics or memory.
+Fly-inspired codes (random projection, then $k$-winners-take-all) are placed on pretrained embeddings. With
+rotation-invariant (e.g.\ Gaussian) weights, the joint law of the codes depends on the inputs only through their
+cosine matrix, so any weight-independent readout is a garbling of that matrix and, on average over weights,
+cannot beat the likelihood-ratio test on cosines. We give the code-overlap curve in closed form and check the
+bound on 182,152 face images. Sparse binary projections, not covered by the bound, perform like their rotated,
+covered counterparts and add nothing. Advantages must come from learned weights, trained readouts, dynamics or
+memory.
 \end{abstract}
 
 \begin{keyword}
@@ -51,11 +53,12 @@ dataset tested and that real wiring is no better than random wiring \citep{senge
 sparse randomized embeddings change search quality considerably \citep{kleyko2024}. What is missing is a
 statement of what the KC layer \emph{cannot} do.
 
-This Letter gives such a statement and tests it. Section~\ref{sec:theory} notes that, for Gaussian $W$, the
-joint law of the codes depends only on the cosine matrix of the inputs; it follows that every readout of the
-codes, however nonlinear, is bounded by the likelihood-ratio (LR) test on cosines. We also give the expected
-code overlap in closed form. Section~\ref{sec:exp} measures the bound on face embeddings, where the question
-matters for face-identifying agents, and examines sparse binary $W$, which the theory does not cover.
+This Letter gives such a statement and checks it. Section~\ref{sec:theory} notes that, for rotation-invariant
+$W$ such as Gaussian $W$, the joint law of the codes depends only on the cosine matrix of the inputs; it follows
+that every readout of the codes that does not itself depend on $W$, however nonlinear, is bounded by the
+likelihood-ratio (LR) test on cosines. We also write the expected code overlap in closed form.
+Section~\ref{sec:exp} checks the bound on face embeddings, where the question matters for face-identifying
+agents, and examines sparse binary $W$, which the theory covers only after a random rotation.
 Section~\ref{sec:disc} reconciles the results with the dimension argument and lists what remains open.
 
 %% ---------------------------------------------------------------------------------------------------------
@@ -64,72 +67,95 @@ An embedding $x\in\R^d\setminus\{0\}$ is mapped to $h(x)\in\{0,1\}^m$, the indic
 coordinates of $Wx$ ($1\le k<m$). For inputs $x_1,\dots,x_n$ let $C_{ij}=\cos(x_i,x_j)$.
 
 \begin{observation}\label{obs:1}
-If the entries of $W$ are i.i.d.\ $\mathcal N(0,1)$, the joint law of $(h(x_1),\dots,h(x_n))$ depends on the
-inputs only through $C$.
+Let $W$ be independent of the inputs, with $WQ\overset{d}{=}W$ for every orthogonal $Q$ (e.g.\ i.i.d.\
+$\mathcal N(0,1)$ entries, or $W_0Q$ with $W_0$ fixed and $Q$ Haar-distributed), and let ties in $k$-WTA be broken
+by a fixed rule. Then the joint law of $(h(x_1),\dots,h(x_n))$ depends on the inputs only through $C$.
 \end{observation}
 \begin{proof}
-$k$-WTA is invariant to positive scaling, so take $u_i=x_i/\|x_i\|$ and $U=[u_1,\dots,u_n]$. Each row $w_r$ of
-$W$ is $\mathcal N(0,I_d)$, so $w_r^\top U\sim\mathcal N(0,U^\top U)=\mathcal N(0,C)$, independently over
-rows. The codes are a measurable function of $WU$, whose law depends only on $C$ (ties have probability zero).
+$k$-WTA is invariant to positive scaling, so take $u_i=x_i/\|x_i\|$ and $U=[u_1,\dots,u_n]$. If
+$U'^{\top}U'=U^\top U$, the map $u_i\mapsto u'_i$ is an isometry between the spans and extends to an orthogonal
+$Q$ with $U'=QU$; hence $WU'=(WQ)U\overset{d}{=}WU$. The codes are a measurable function of $WU$. (For Gaussian
+$W$, the rows of $WU$ are i.i.d.\ $\mathcal N(0,C)$ and ties have probability zero.)
 \end{proof}
 
-The fact itself is elementary; it is the rotation invariance $WQ\overset{d}{=}W$ behind SimHash
-\citep{charikar2002} and random-feature kernels \citep{rahimi2007,cho2009}, and an asymptotic overlap law for
-random projection with a $k$-cap is known for sparse binary inputs \citep{papadimitriou2019}. Its consequence
-for discrimination with $k$-WTA codes, however, does not appear to have been stated.
+The fact is elementary: it is the invariance behind SimHash \citep{charikar2002}, random-feature kernels
+\citep{rahimi2007} and rank-order hashing of Gaussian projections \citep{eshghi2008}, the top-1 relative of
+$k$-WTA; an asymptotic overlap law for a $k$-cap is known for sparse binary inputs \citep{papadimitriou2019}.
+The step below is the classical reduction of a test to a maximal invariant \citep{lehmann2022}; we have not
+found it stated for $k$-WTA codes.
 
 \paragraph{Discrimination task} $K$ images $e_1,\dots,e_K$ of a person are enrolled; a query $q$ is either a new
-image of that person ($Y=1$) or an image of a stranger ($Y=0$). A \emph{KC-based score} is any
+image of that person ($Y=1$) or an image of a stranger ($Y=0$). A \emph{KC-based score} is
 $S=F(h(q),h(e_1),\dots,h(e_K),Z)$ with $F$ measurable (it may include saturating plasticity, forgetting or
-thresholds) and side information $Z$ independent of $(W,\text{images},Y)$. Let $C$ be the cosine matrix of
-$(q,e_1,\dots,e_K)$.
+thresholds on the enrolled codes) and side information $Z$; neither $F$ nor the law of $Z$ may depend on $W$.
+Let $C$ be the cosine matrix of $(q,e_1,\dots,e_K)$. Probabilities are per trial, over $W$, the images and $Z$.
 
 \begin{corollary}\label{cor:1}
-If $W$ is Gaussian and independent of the images, then $Y\to C\to S$ is a Markov chain. Hence, at every
-false-positive rate $\alpha$, $\mathrm{TPR}_S(\alpha)\le\mathrm{TPR}^{*}_C(\alpha)$, where
-$\mathrm{TPR}^{*}_C$ is the ROC of the LR test $p(C\mid Y{=}1)/p(C\mid Y{=}0)$; in particular
-$\mathrm{AUC}(S)\le\mathrm{AUC}^{*}_C$.
+Let $W$ be as in Observation~\ref{obs:1} and independent of $(q,e_1,\dots,e_K,Y)$, and let $Z$ be independent of
+$(W,q,e_1,\dots,e_K,Y)$. Then $S\perp Y\mid C$. Hence at every false-positive rate $\alpha$,
+$\mathrm{TPR}_S(\alpha)\le\mathrm{TPR}^{*}_C(\alpha)$, where both sides allow randomisation at the threshold and
+$\mathrm{TPR}^{*}_C$ is the ROC of the Neyman--Pearson test on $\Lambda=dP(C\mid Y{=}1)/dP(C\mid Y{=}0)$; in
+particular $\mathrm{AUC}(S)\le\mathrm{AUC}^{*}_C$, with ties counted as $1/2$.
 \end{corollary}
 \begin{proof}
-By Observation~\ref{obs:1}, given the images and $Y$ the codes have a law that depends only on $C$, and $Z$
-is independent of everything else; so the law of $S$ given $(\text{images},Y)$ is a Markov kernel applied to
-$C$, i.e.\ $S$ is a garbling of $C$ in Blackwell's sense \citep{blackwell1953}. Any test on $S$ is thus a
-randomised test on $C$, and by the Neyman--Pearson lemma \citep{neyman1933} none has more power at level
-$\alpha$ than the LR test on $C$.
+By Observation~\ref{obs:1}, $\Pr[S\in A\mid\text{images},Y]=K(A\mid C)$ for a Markov kernel $K$, hence
+$\Pr[S\in A\mid C,Y]=K(A\mid C)$: $S$ is a garbling of $C$ \citep{blackwell1953}. A threshold test on $S$,
+$\phi=\Pr[S>\tau\mid C]+\gamma\Pr[S=\tau\mid C]$, is therefore a randomised test on $C$, and by the
+Neyman--Pearson lemma \citep{neyman1933} none has more power at level $\alpha$ than the test on $\Lambda$.
+Integrating the ROC gives the AUC statement.
 \end{proof}
 
 \begin{remark}[the ceiling is the LR test, not raw cosine]\label{rem:lr}
-Ranking by raw $\max_j\cos(q,e_j)$ attains the ceiling only when the LR is monotone in it. If negatives are
-selected by the very similarity being evaluated, the LR can be non-monotone, and a noisy garbling of cosine
-can beat raw cosine without violating Corollary~\ref{cor:1} (Section~\ref{sec:exp}).
+Ranking by raw $\max_j\cos(q,e_j)$ attains the ceiling only when that statistic is sufficient for $Y$ given $C$
+and the LR is monotone in it. If negatives are selected by the very similarity being evaluated, the LR can be
+non-monotone, and a noisy garbling of cosine can beat raw cosine without violating Corollary~\ref{cor:1}
+(Section~\ref{sec:exp}). If $Z$ depends on the images or labels, the ceiling is the LR test on $(C,Z)$.
 \end{remark}
 
-\begin{remark}[one $W$ for all queries]
-A deployed system uses one $W$. Each query's marginal law is unchanged, so the \emph{expected} operating point
-over $W$ at any threshold lies on or below $\mathrm{TPR}^*_C$; an empirical AUC from a single draw compares
-queries scored with the same $W$ and may exceed the ceiling slightly. We therefore report means over draws.
+\begin{remark}[one $W$ for all queries]\label{rem:onew}
+A deployed system uses one $W$. Each trial's marginal law is unchanged, so the \emph{expected} operating point
+over $W$ at any fixed threshold lies on or below $\mathrm{TPR}^*_C$. The AUC of a single draw, however, compares
+two queries scored with the same $W$; its expectation is not the AUC bounded above. We therefore report the
+\emph{cross-draw} AUC, which compares a positive and a negative scored with different, independent draws and is
+an unbiased estimate of $\mathrm{AUC}(S)$.
+\end{remark}
+
+\begin{remark}[trained readouts]\label{rem:trained}
+The bound does not cover readouts that depend on $W$, e.g.\ trained on labelled codes made with the same $W$:
+for fixed $W$ the code carries more than cosines. In $d=2$, positives at angle $+\theta$ and negatives at
+$-\theta$ from $e$ have the same cosine, so $\mathrm{AUC}^*_C=1/2$, yet a readout trained on a few labelled codes
+separates them. Such readouts are bounded instead by Remark~\ref{rem:loop}.
 \end{remark}
 
 \begin{remark}[closed loop]\label{rem:loop}
-If an agent's later inputs and feedback depend on its actions, condition on the finite pool of images that can
-ever be presented: the codes of the whole pool have a law depending only on the pool's cosine matrix, so the
-whole trajectory of a Gaussian-$W$ KC agent is a garbling of it. Any advantage over a learner with access to the
-cosine matrix must come from the learning dynamics, not the representation.
+Let an agent see images $x_1,x_2,\dots$ chosen by an environment that may depend on its past actions, on
+feedback and on randomness independent of $W$, and act on $h(x_1),\dots,h(x_t)$, the feedback and internal
+randomness. Given $Wu_1,\dots,Wu_{t-1}$, the column $Wu_t$ is Gaussian with mean and covariance computed from the
+cosines of $x_1,\dots,x_t$ only. A simulator that draws $Wu_t$ this way and runs the agent reproduces the law of
+the whole trajectory while seeing only cosines among the images shown so far, plus the same feedback. So a
+Gaussian-$W$ KC agent, including one whose readout is trained online, cannot outperform the best learner given
+those cosines and that feedback; an advantage over a \emph{specific} cosine-based learner comes from its learning
+rule, not from the representation.
 \end{remark}
 
 \paragraph{Overlap curve} By Observation~\ref{obs:1}, the expected overlap $\kappa(c)=\E|h(x)\wedge h(y)|/k$
-is a function of $c=\cos(x,y)$. For large $m$, $k$-WTA acts as a threshold $t=\Phi^{-1}(1-k/m)$ on standard
-normal pre-activations, so
+is a function of $c=\cos(x,y)$. As $m\to\infty$ with $p=k/m$ fixed, the $k$-WTA cut-off of the standard normal
+pre-activations converges to $t=\Phi^{-1}(1-p)$, so
 \begin{equation}\label{eq:kappa}
-\kappa(c)\approx \Pr[Z_1>t,\,Z_2>t]\,/\,(k/m),\qquad (Z_1,Z_2)\sim\mathcal N\!\left(0,\begin{pmatrix}1&c\\c&1\end{pmatrix}\right),
+\kappa(c)\to \frac{\Pr[Z_1>t,\,Z_2>t]}{p}=\frac{1-\Phi(t)-2\,T\!\big(t,\sqrt{(1-c)/(1+c)}\big)}{p},\qquad
+\mathrm{corr}(Z_1,Z_2)=c,
 \end{equation}
-a bivariate normal orthant probability. Eq.~\eqref{eq:kappa} is the kernel a matched non-KC baseline should
-use.
+with $T$ Owen's function. This orthant form is the dense-Gaussian case of the overlap analysis of
+\citet{babadi2014}; $\kappa$ increases strictly from $p$ at $c=0$ to 1 at $c=1$, so an overlap score is a noisy
+monotone transform of cosine. It should not be used for very sparse codes ($k$ fixed, $m\to\infty$). It is the
+kernel a matched non-KC baseline should use.
 
 \paragraph{Sparse binary $W$} The thesis-style and fly-hash designs use rows with 6--10 ones
-\citep{dasgupta2017,caron2013}. Such $W$ is not rotation invariant, so Corollary~\ref{cor:1} does not apply and
-codes may depend on the backbone's coordinate basis \citep{sharma2018}. This is an empirical question, tested
-below with a random-rotation control.
+\citep{dasgupta2017,caron2013}. Such $W$ is not rotation invariant: a row with $n$ ones has
+$\E[w^\top u]=(n/d)\,\mathbf 1^\top u$, so codes may also depend on each input's component along $\mathbf 1$ and
+on the backbone's coordinate basis \citep{sharma2018}. Rotating the embeddings by a fresh Haar $Q$ makes the
+design $W_0Q$ covered by Observation~\ref{obs:1}; comparing sparse $W$ with and without rotation therefore tests
+whether the coordinate basis carries extra information.
 
 %% ---------------------------------------------------------------------------------------------------------
 \section{Experiments on face embeddings}\label{sec:exp}
@@ -139,51 +165,54 @@ InceptionResnetV1 trained on VGGFace2 \citep{schroff2015,cao2018} (512-d) and DI
 (384-d), $\ell_2$-normalised. Per test identity, $K=5$ enrolled images, 5 positive queries, 5
 \emph{look-alike} strangers and 5 random strangers. Look-alikes are pool identities ranked by the cosine of a
 prototype built from half of their images; queries are drawn from the other half. KC layer: $m=2000$,
-$k=100$ (5\%), score $=\max_j |h(q)\wedge h(e_j)|$. AUC is positives versus look-alikes; 10 draws of $W$;
-95\% CIs by bootstrap over identities.
+$k=100$ (5\%), score $=\max_j |h(q)\wedge h(e_j)|$. AUC is positives versus look-alikes, ties counted as 1/2;
+10 draws of $W$ (and of $Q$ for rotated runs); KC AUCs are cross-draw (Remark~\ref{rem:onew}); 95\% CIs by
+bootstrap over identities.
 
 \paragraph{Overlap curve and rotation} With a fresh Gaussian $W$ per pair (200 pairs per cosine), Eq.~\eqref{eq:kappa}
-agrees with the Monte-Carlo mean to within 0.006 at all 22 cosines in $[0,0.99]$ (Fig.~\ref{fig:1}a). On real
-pairs (300 same-person and 300 stranger pairs per backbone), Kolmogorov--Smirnov tests do not distinguish
-overlaps with and without a random orthogonal rotation of the embeddings, for Gaussian $W$ ($p\ge0.90$) and,
-notably, also for sparse binary $W$ ($p\ge0.40$); sparse-$W$ overlaps sit on the Gaussian curve
-(mean residuals within $\pm0.01$). On synthetic clustered vectors the same sparse $W$ fails the rotation and cosine-only tests
-($p$ as low as $10^{-77}$), so near-invariance is a property of the embeddings, which spread energy over many coordinates,
-not of sparse $W$ in general.
+agrees with the Monte-Carlo mean within Monte-Carlo error (largest gap 0.0052, SE $\approx0.003$) at all 22
+cosines in $[0,0.99]$ (Fig.~\ref{fig:1}a). On real pairs (300 same-person and 300 stranger pairs per backbone),
+Kolmogorov--Smirnov tests do not distinguish pairwise overlaps with and without a random rotation, for Gaussian
+$W$ ($p\ge0.90$) and also for sparse binary $W$ ($p\ge0.40$), whose overlaps sit on the Gaussian curve (mean
+residuals within $\pm0.01$). This is a pairwise test with limited power, not a test of the joint law. On
+synthetic clustered vectors the same sparse $W$ fails both tests ($p$ as low as $10^{-77}$), so the behaviour is a
+property of these embeddings, which spread energy over many coordinates and have a small component along
+$\mathbf 1$ (cosine with $\mathbf 1$ between $-0.08$ and $0.07$ on facenet and between $-0.02$ and $0.01$ on DINOv2, 5th--95th percentiles), consistent with the central-limit argument for sparse projections \citep{li2006}.
 
-\paragraph{Discrimination} Table~\ref{tab:auc} gives the results. The LR ceiling, estimated by 2-fold
-cross-fitted binning of the max-cosine score, is within estimation error of raw cosine (on DINOv2 the binned
-estimate, 0.556, even falls below raw cosine, 0.562), so we use raw cosine as the reference. Gaussian KC codes
-stay below raw cosine on both backbones, as Corollary~\ref{cor:1} predicts. Sparse binary codes are no
-better: the difference from raw cosine is $-0.0065$ on facenet (CI over draws entirely negative) and
-$-0.004$ to $-0.005$ on DINOv2 (CI includes 0), with or without rotation. Variation across draws of $W$ is
-small (SD $\le 0.0006$).
+\paragraph{Discrimination} Table~\ref{tab:auc} gives the results. The cross-fitted LR estimate on the
+max-cosine score is within estimation error of raw cosine (on DINOv2 it even falls below), so we use raw cosine
+as the reference. Gaussian KC codes stay below raw cosine on both backbones, and hence below the ceiling.
+Sparse binary codes are no better: the difference from raw cosine is $-0.0065$ on facenet (CI over draws
+entirely negative) and $-0.004$ to $-0.005$ on DINOv2 (CI includes 0), equal with and without rotation, i.e.\
+equal to the covered case. Mean-centring the embeddings, which removes the $\mathbf 1$ component, changes nothing: sparse minus raw cosine is then $-0.0064$ (facenet) and $-0.0045$ (DINOv2). Cross-draw and per-draw AUCs agree to within 0.0002, and the SD of per-draw AUCs is
+$\le0.003$.
 
-\begin{table}[t]\centering
-\caption{AUC, same person versus look-alike stranger (mean over 10 draws of $W$; ``rot.'' = embeddings
-randomly rotated first).}\label{tab:auc}
+\begin{table}[p]\centering
+\caption{AUC, same person versus look-alike stranger. KC rows: cross-draw AUC over 10 draws; ``rot.'' =
+embeddings randomly rotated first, which makes sparse $W$ a covered design.}\label{tab:auc}
 \begin{tabular}{lcc}\toprule
  & facenet & DINOv2\\\midrule
-LR ceiling (cross-fitted) & 0.969 & 0.556\\
+LR on max-cosine (cross-fitted estimate) & 0.969 & 0.556\\
 raw cosine & 0.963 & 0.562\\
 KC, Gaussian $W$ (no rot.\ / rot.) & 0.957 / 0.956 & 0.558 / 0.559\\
-KC, sparse binary $W$ (no rot.\ / rot.) & 0.956 / 0.956 & 0.557 / 0.558\\
+KC, sparse binary $W$ (no rot.\ / rot.) & 0.956 / 0.956 & 0.556 / 0.558\\
 sparse $-$ raw cosine, 95\% CI range over draws & $[-0.008,\,-0.004]$ & $[-0.011,\,+0.005]$\\
 \bottomrule\end{tabular}
-\end{table}
 
-\begin{figure}[t]\centering
+\vspace{1.5em}
 \includegraphics[width=\textwidth]{fig1.pdf}
+\captionsetup{type=figure}
 \caption{(a) Expected KC code overlap: closed form Eq.~\eqref{eq:kappa} (line), Monte-Carlo with Gaussian $W$
 (dots, $\pm$SD), and real face pairs for Gaussian and sparse binary $W$ (open markers; squares facenet,
 triangles DINOv2). (b) Max cosine of a query to the enrolled images (facenet): look-alike strangers overlap
 the same-person distribution, which is what makes the task hard.}\label{fig:1}
-\end{figure}
+\end{table}
 
 \paragraph{A selection artefact} In a first version of the task, look-alikes were the pool \emph{images} most
 similar to the prototype in the evaluated embedding. For DINOv2 this inverts the LR: raw cosine scores an AUC
 of 0.220, below chance, and Gaussian KC codes score 0.230 --- apparently above the ``ceiling''. It is not a
-violation: the cross-fitted LR ceiling of the same statistic is 0.784 (Remark~\ref{rem:lr}). The lesson is
+violation: the cross-fitted LR estimate on the same statistic, itself a lower bound on the ceiling, is 0.784
+(Remark~\ref{rem:lr}). The lesson is
 general for evaluations of bio-inspired codes: state the ceiling as the LR test, and never select negatives by
 the score under test.
 
@@ -192,17 +221,19 @@ the score under test.
 \paragraph{Relation to the dimension argument} \citet{litwinkumar2017} show that sparse
 connectivity maximises the dimension of KC representations of low-dimensional, noisy inputs, which helps a
 \emph{linear} readout learn many associations. Corollary~\ref{cor:1} is about a different quantity: the best
-achievable discrimination by \emph{any} readout. Both can hold. A KC code may make a simple readout reach the
-ceiling with fewer samples, but it cannot raise the ceiling. On dense, normalised embeddings of several hundred
-dimensions, our data also suggest that 6--10-input sums already behave like Gaussian projections, so the
-distinction between sparse and dense wiring largely disappears.
+achievable discrimination by any readout that does not depend on $W$. Both can hold. A KC code may make a
+simple, trained readout learn faster, but for a fixed comparison it does not raise the ceiling of a learner that
+has the cosines and the same labels (Remarks~\ref{rem:trained}--\ref{rem:loop}). On dense, normalised embeddings
+of several hundred dimensions, our data also suggest that 6--10-input sums already behave like Gaussian
+projections \citep{li2006}, so the distinction between sparse and dense wiring largely disappears.
 
 \paragraph{Explaining the connectome result} \citet{senge2026} found that real-valued Gaussian
 projections beat the fly hash and that connectome wiring adds nothing over random wiring. Corollary~\ref{cor:1}
 offers a reason: for isotropic, data-independent $W$, the code carries at most the information in the cosine
-matrix, and binarisation can only lose some of it. Learned projections such as BioHash \citep{ryali2020} and
-FlyVec \citep{liang2021} escape the bound because $W$ depends on the data; expressivity results for
-expand-and-sparsify \citep{dasgupta2020} concern approximation by a trained readout and likewise do not raise it.
+matrix of the database and queries, and binarisation can only lose some of it. Learned projections such as
+BioHash \citep{ryali2020} and FlyVec \citep{liang2021} escape the bound because $W$ depends on the data, and so do
+trained readouts; expressivity results for expand-and-sparsify \citep{dasgupta2020} concern such readouts and
+are bounded instead by the best learner given the cosines and labels of the training and test images.
 
 \paragraph{Implications} For systems that put a fly-inspired layer on frozen features, a random KC layer
 should be expected to preserve, not improve, discriminability, and a kernel baseline using Eq.~\eqref{eq:kappa}
@@ -210,8 +241,9 @@ isolates the effect of the representation from that of the readout. Any remainin
 learned weights, from learning dynamics (Remark~\ref{rem:loop}) or from memory, e.g.\ fixed-size familiarity signals that
 store no exemplars.
 
-\paragraph{Limitations} The bound concerns expected operating points over $W$; a single fixed $W$ is covered
-only approximately. The sparse-$W$ result is empirical, on one dataset and two backbones; embeddings with energy
+\paragraph{Limitations} The bound concerns expected operating points and the cross-draw AUC over $W$; a single
+fixed $W$, and in particular its own AUC, is not covered, although for large $m$ each overlap concentrates around
+$\kappa(\cos)$. The sparse-$W$ result without rotation is empirical, on one dataset and two backbones; embeddings with energy
 concentrated in few coordinates may behave differently \citep{kleyko2024}. The LR ceiling is estimated by
 binning one summary statistic of $C$ and is therefore itself a lower bound on the true ceiling.
 
